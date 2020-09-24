@@ -91,6 +91,8 @@ Plugin 'yuratomo/w3m.vim'
 
 Plugin 'gauteh/vim-cppman'
 
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
