@@ -364,3 +364,5 @@ nnoremap <f11> <C-w>+
 nnoremap <f12> <C-w>-
 
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
+
+let g:sh_noisk = 1
