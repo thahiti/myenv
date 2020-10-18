@@ -1,30 +1,3 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
-
-Plug 'google/vim-maktaba'
-Plug 'google/vim-codefmt'
-Plug 'google/vim-glaive'
-
-Plug 'kien/ctrlp.vim'
-Plug 'preservim/nerdtree'
-Plug 'flazz/vim-colorschemes'
-Plug 'nelstrom/vim-visual-star-search'
-Plug 'wellle/targets.vim'
-Plug 'majutsushi/tagbar'
-
-Plug 'tpope/vim-fugitive'
-Plug 'rstacruz/sparkup', {'rtp': 'vim'}
-Plug 'gmarik/vundle'
-Plug 'easymotion/vim-easymotion'
-Plug 'bling/vim-airline'
-Plug 'ervandew/supertab'
-
-" Initialize plugin system
-call plug#end()
-
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
