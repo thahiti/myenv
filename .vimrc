@@ -239,27 +239,15 @@ noremap gf lgf
 "map 500k<enter>
 "map 500j<enter>
 
-if has('win32')
-map ,rl :source c:\Users\admin\_vimrc<enter>
-else
 map ,rl :source ~/.vimrc<enter>
-endif
 "map ( mzviw/[ ]*=[^=] ")<enter>
 "map * mzviw/\<\><enter>
 nnoremap :!python %
 
-"following should be end of file
-if has('win32')
-lang mes en_US
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
-source $VIMRUNTIME/mswin.vim
-endif
-
 if has("gui_running")
 " set guifont=consolas:h12: " use this font
 " set guifont=Dejavu\ Sans\ Mono:h10
-set guifont=Hack\ Nerd\ Font:h16
+set guifont=Hack:h13
 
 "height = 50 lines
 set lines=40
