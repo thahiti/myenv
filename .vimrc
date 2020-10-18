@@ -60,8 +60,6 @@ Plugin 'ervandew/supertab'
 
 Plugin 'zivyangll/git-blame.vim'
 
-Plugin 'yuratomo/w3m.vim'
-
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
 call vundle#end()            " required
