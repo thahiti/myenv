@@ -192,18 +192,6 @@ let g:airline_section_c = '%t'
 "nnoremap o :set noimd<enter>o
 "nnoremap O :set noimd<enter>O
 
-"exploring buffers
-map ,1 :b!1<enter>
-map ,2 :b!2<enter>
-map ,3 :b!3<enter>
-map ,4 :b!4<enter>
-map ,5 :b!5<enter>
-map ,6 :b!6<enter>
-map ,7 :b!7<enter>
-map ,8 :b!8<enter>
-map ,9 :b!9<enter>
-map ,0 :b!0<enter>
-
 "tagbar
 map <f8> :TagbarToggle<enter>
 map <f7> :NERDTree<enter>
@@ -234,10 +222,12 @@ map ,m :MarksBrowse<enter>
 "map fg 0f:l"+yw0gf:
 noremap gf lgf
 
-"map 500k<enter>
-"map 500j<enter>
-
+if has('win32')
+map ,rl :source c:\Users\admin\_vimrc<enter>
+else
 map ,rl :source ~/.vimrc<enter>
+endif
+
 "map ( mzviw/[ ]*=[^=] ")<enter>
 "map * mzviw/\<\><enter>
 nnoremap :!python %
@@ -307,19 +297,26 @@ noremap <F2> :grep! <cword><CR><CR>
 "noremap <F2> :grep! <cword><CR><CR>:copen<CR><CR>
 "nmap <F3> :silent!/<c-r>=expand("<cword>")<cr><cr>:grep! <cword><CR><CR>:copen<CR>
 
+"change focus
 noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
 noremap <C-k> <C-w>k
 noremap <C-j> <C-w>j
 noremap <C-i> <C-w>p
 
-nnoremap <leader>1 1g,
+"nnoremap <leader>l 1g,
 
+"adjust window size
 nnoremap <f9> <C-w><
 nnoremap <f10> <C-w>>
 nnoremap <f11> <C-w>+
 nnoremap <f12> <C-w>-
 
+"show git blame
 nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
 let g:sh_noisk = 1
+
+"enable mouse
+set mouse=a
+set selectmode=mouse,key,cmd
