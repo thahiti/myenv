@@ -62,6 +62,11 @@ Plugin 'zivyangll/git-blame.vim'
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
+Plugin 'uplus/vim-clang-rename'
+
+Plugin 'prabirshrestha/vim-lsp'
+Plugin 'mattn/vim-lsp-settings'
+Plugin 'udalov/kotlin-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -235,7 +240,7 @@ nnoremap :!python %
 if has("gui_running")
 " set guifont=consolas:h12: " use this font
 " set guifont=Dejavu\ Sans\ Mono:h10
-set guifont=Hack:h13
+set guifont=Hack\ Nerd\ Font:h13
 
 "height = 50 lines
 set lines=40
@@ -320,3 +325,34 @@ let g:sh_noisk = 1
 "enable mouse
 set mouse=a
 set selectmode=mouse,key,cmd
+
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'allowlist': ['python'],
+        \ })
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
