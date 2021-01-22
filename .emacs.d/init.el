@@ -93,7 +93,7 @@
 (defun shiren/split-smart ()
   (if (< (window-pixel-width) (window-pixel-height))
       (with-selected-window (selected-window)
-        (split-window-vertically))
+	(split-window-vertically))
     (with-selected-window (selected-window)
       (split-window-horizontally))))
 
@@ -105,7 +105,7 @@
 
 (when (and window-system (eq system-type 'darwin))
   ;; (set-face-attribute 'default nil :family "Source Code Pro" :height 140 :weight 'normal)
-  (set-face-attribute 'default nil :family "JetBrains Mono" :height 140 :weight 'normal)
+  (set-face-attribute 'default nil :family "Hack Nerd Font" :height 130 :weight 'normal)
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
   (setq-default line-spacing 0))
 
@@ -136,9 +136,10 @@
 (require 'package)
 
 (setq package-archives '(("gnu"           . "http://elpa.gnu.org/packages/")
-                         ("melpa-stable" . "http://stable.melpa.org/packages/")
-                         ("melpa"        . "http://melpa.org/packages/")
-                         ("org"          . "http://orgmode.org/elpa/")))
+			 ("marmalade" . "https://marmalade-repo.org/packages/")
+			 ("melpa-stable" . "http://stable.melpa.org/packages/")
+			 ("melpa"        . "http://melpa.org/packages/")
+			 ("org"          . "http://orgmode.org/elpa/")))
 
 (package-initialize)
 
@@ -199,8 +200,8 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-items '((recents  . 20)
-                          (bookmarks . 10)
-                          (projects . 10))))
+			  (bookmarks . 10)
+			  (projects . 10))))
 
 (use-package helpful
   :ensure t
@@ -314,11 +315,11 @@
   (eyebrowse-mode t)
   :bind
   (:map eyebrowse-mode-map
-        ("C-j ;" . eyebrowse-last-window-config)
-        ("C-j 0" . eyebrowse-close-window-config)
-        ("C-j 1" . eyebrowse-switch-to-window-config-1)
-        ("C-j 2" . eyebrowse-switch-to-window-config-2)
-        ("C-j 3" . eyebrowse-switch-to-window-config-3)))
+	("C-j ;" . eyebrowse-last-window-config)
+	("C-j 0" . eyebrowse-close-window-config)
+	("C-j 1" . eyebrowse-switch-to-window-config-1)
+	("C-j 2" . eyebrowse-switch-to-window-config-2)
+	("C-j 3" . eyebrowse-switch-to-window-config-3)))
 
 (use-package ace-window
   :ensure t
@@ -357,11 +358,11 @@
   ;; does not count candidates
   (setq ivy-count-format "")
   (setq ivy-switch-buffer-faces-alist
-        '((emacs-lisp-mode . outline-1)
-          (dired-mode . outline-2)
-          (js2-mode . outline-4)
-          (clojure-mode . outline-5)
-          (org-mode . outline-3)))
+	'((emacs-lisp-mode . outline-1)
+	  (dired-mode . outline-2)
+	  (js2-mode . outline-4)
+	  (clojure-mode . outline-5)
+	  (org-mode . outline-3)))
   :bind
   (("M-x". counsel-M-x)
    ("C-x C-f". counsel-find-file)
@@ -413,7 +414,7 @@
   :ensure t
   :ensure-system-package rg
   :bind (("C-j n" . dumb-jump-go-other-window)
-         ("C-j m" . dumb-jump-go))
+	 ("C-j m" . dumb-jump-go))
   :config
   (setq dumb-jump-selector 'ivy)
   (setq dumb-jump-force-searcher 'rg))
@@ -445,14 +446,14 @@
   (interactive)
   (if (bound-and-true-p evil-local-mode)
       (progn
-                                        ; go emacs
-        (evil-local-mode (or -1 1))
-        (undo-tree-mode (or -1 1))
-        (evil-escape-mode -1)
-        (set-variable 'cursor-type 'bar))
+					; go emacs
+	(evil-local-mode (or -1 1))
+	(undo-tree-mode (or -1 1))
+	(evil-escape-mode -1)
+	(set-variable 'cursor-type 'bar))
 
     (progn
-                                        ; go evil
+					; go evil
       (evil-local-mode (or 1 1))
       (evil-escape-mode t)
       (set-variable 'cursor-type 'box))))
@@ -484,7 +485,7 @@
   (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
   :bind
   (:map paredit-mode-map
-        ("C-M-f" . nil)))
+	("C-M-f" . nil)))
 
 (use-package parinfer
   :ensure t
@@ -493,12 +494,12 @@
   :init
   (progn
     (setq parinfer-extensions
-          '(defaults       ; should be included.
-             pretty-parens  ; different paren styles for different modes.
-             ;;lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
-             paredit        ; Introduce some paredit commands.
-             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-             smart-yank))   ; Yank behavior depend on mode.
+	  '(defaults       ; should be included.
+	     pretty-parens  ; different paren styles for different modes.
+	     ;;lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
+	     paredit        ; Introduce some paredit commands.
+	     smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+	     smart-yank))   ; Yank behavior depend on mode.
     (add-hook 'clojure-mode-hook #'parinfer-mode)
     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
     (add-hook 'common-lisp-mode-hook #'parinfer-mode)
@@ -512,9 +513,9 @@
 (use-package recentf
   :init
   (setq recentf-max-saved-items 300
-        recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
-                          "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
-                          ".gz" "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:"))
+	recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
+			  "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
+			  ".gz" "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:"))
   (recentf-mode t))
 
 (use-package ibuffer
@@ -539,11 +540,11 @@
   (setq projectile-indexing-method 'alien)
   ;;(setq projectile-indexing-method 'native)
   (setq projectile-globally-ignored-directories
-        (append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs" "deploy")
-                projectile-globally-ignored-directories))
+	(append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs" "deploy")
+		projectile-globally-ignored-directories))
   (setq projectile-globally-ignored-file-suffixes
-        (append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
-                projectile-globally-ignored-file-suffixes))
+	(append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
+		projectile-globally-ignored-file-suffixes))
   (setq grep-find-ignored-directories (append '("dist" "deploy" "node_modules") grep-find-ignored-directories))
   :bind
   ;; 오타방지용 바인드들
@@ -565,10 +566,10 @@
   :ensure t
   :init
   (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-projectile-set-filter-groups)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic)))))
+	    (lambda ()
+	      (ibuffer-projectile-set-filter-groups)
+	      (unless (eq ibuffer-sorting-mode 'alphabetic)
+		(ibuffer-do-sort-by-alphabetic)))))
 
 (use-package counsel
   :ensure t)
@@ -599,9 +600,9 @@
 
   (defun company-mode/backend-with-yas (backend)
     (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-        backend
+	backend
       (append (if (consp backend) backend (list backend))
-              '(:with company-yasnippet))))
+	      '(:with company-yasnippet))))
   (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
   (define-key company-active-map (kbd "M-n") nil)
@@ -616,29 +617,29 @@
   (global-flycheck-mode)
   (setq flycheck-check-syntax-automatically '(save mode-enabled new-line idle-change idle-buffer-switch))
   (setq-default flycheck-disabled-checkers
-                (append flycheck-disabled-checkers
-                        '(javascript-jshint typescript-tslint)))
+		(append flycheck-disabled-checkers
+			'(javascript-jshint typescript-tslint)))
   (setq flycheck-checkers '(javascript-eslint
-                            tsx-tide
-                            typescript-tide
-                            emacs-lisp
-                            emacs-lisp-checkdoc
-                            css-csslint
-                            markdown-mdl
-                            sass
-                            go-build
-                            go-fmt
-                            go-golint
-                            package-lint
-                            rust
-                            sh-zsh))
+			    tsx-tide
+			    typescript-tide
+			    emacs-lisp
+			    emacs-lisp-checkdoc
+			    css-csslint
+			    markdown-mdl
+			    sass
+			    go-build
+			    go-fmt
+			    go-golint
+			    package-lint
+			    rust
+			    sh-zsh))
   (setq flycheck-highlighting-mode 'lines)
   (setq flycheck-indication-mode 'left-fringe)
   (flycheck-add-mode 'javascript-eslint 'vue-mode)
   (setq-default flycheck-emacs-lisp-load-path load-path)
   (add-hook 'js2-init-hook
-            '(lambda ()
-               (setq next-error-function 'flycheck-next-error))))
+	    '(lambda ()
+	       (setq next-error-function 'flycheck-next-error))))
 
 (use-package flycheck-package
   :ensure t
@@ -651,11 +652,11 @@
 (defun shiren/use-eslint-from-node-modules ()
   "Use eslint from node modules."
   (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (eslint (and root
-                      (expand-file-name "node_modules/eslint/bin/eslint.js"
-                                        root))))
+		(or (buffer-file-name) default-directory)
+		"node_modules"))
+	 (eslint (and root
+		      (expand-file-name "node_modules/eslint/bin/eslint.js"
+					root))))
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))
     eslint))
@@ -666,13 +667,20 @@
   ;; :ensure-system-package
   ;; (typescript-language-server . "npm i -g typescript-language-server")
   ;; (vue-language-server . "npm install vue-language-server -g")
+  :commands lsp
   :ensure t
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
   :init
+  (add-to-list 'exec-path "~/bin/elixir-ls")
   (add-hook 'js2-mode-hook #'lsp)
   (add-hook 'js-mode-hook #'lsp)
   (add-hook 'vue-mode-hook #'lsp)
   (add-hook 'haskell-mode-hook #'lsp)
   (add-hook 'cc-mode-hook #'lsp)
+  (add-hook 'c-mode-hook #'lsp)
+  (add-hook 'c++-mode-hook #'lsp)
   ;; (add-hook 'typescript-mode-hook #'lsp)
   (add-hook 'swift-mode-hook #'lsp)
   :config
@@ -688,8 +696,16 @@
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-enable-symbol-highlighting nil)
-
-  (setq lsp-javascript-implicit-project-config-experimental-decorators t))
+  (setq lsp-javascript-implicit-project-config-experimental-decorators t)
+  (progn
+    (add-hook 'prog-mode-hook #'lsp)
+    (lsp-register-client
+     (make-lsp-client :new-connection (lsp-tramp-connection
+				       "/home/deploy/bin/clangd")
+		      :major-modes '(c-mode c++-mode)
+		      :remote? t
+		      )))
+  )
 
 (use-package lsp-ui
   :ensure t
@@ -738,8 +754,8 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-hook 'js2-mode-hook
-            '(lambda ()
-               (js2-imenu-extras-mode)))
+	    '(lambda ()
+	       (js2-imenu-extras-mode)))
   :config
   (define-key js2-mode-map (kbd "M-.") nil)
   (define-key js2-mode-map (kbd "C-c C-j") nil)
@@ -749,16 +765,16 @@
   (setq js2-include-node-externs t)
   (setq js2-pretty-multiline-declarations nil)
   (add-hook 'js2-mode-hook (lambda ()
-                             ;;(add-hook 'after-save-hook 'eslint-fix nil t)
-                             (setq tab-width 2)
-                             (setq-default js2-basic-offset 2)
-                             (setq js-switch-indent-offset 2)
-                             (electric-indent-mode -1)
-                             (js2-imenu-extras-mode)))
+			     ;;(add-hook 'after-save-hook 'eslint-fix nil t)
+			     (setq tab-width 2)
+			     (setq-default js2-basic-offset 2)
+			     (setq js-switch-indent-offset 2)
+			     (electric-indent-mode -1)
+			     (js2-imenu-extras-mode)))
   (setq-default js2-basic-offset 2
-                js1-bounce-indent-p nil)
+		js1-bounce-indent-p nil)
   (setq-default js2-mode-show-parse-errors nil
-                js2-mode-show-strict-warnings nil))
+		js2-mode-show-strict-warnings nil))
 
 
 (use-package vue-mode
@@ -771,9 +787,9 @@
   (setq mmm-js-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
   (setq mmm-typescript-mode-enter-hook (lambda () (setq syntax-ppss-table nil)))
   (add-hook 'mmm-mode-hook
-            (lambda ()
-              (setq mmm-submode-decoration-level 2)
-              (set-face-background 'mmm-default-submode-face nil))))
+	    (lambda ()
+	      (setq mmm-submode-decoration-level 2)
+	      (set-face-background 'mmm-default-submode-face nil))))
 
 (use-package rjsx-mode
   :ensure t
@@ -792,22 +808,22 @@
   :init
   :config
   (setq prettier-js-args '(
-                           "--singleQuote" "true"
-                           "--printWidth" "100"
-                           "--tabWidth" "2"
-                           "--useTabs" "false"
-                           "--semi" "true"
-                           "--quoteProps" "as-needed"
-                           "--jsxSingleQuote" "false"
-                           "--trailingComma" "es5"
-                           "--arrowParens" "always"
-                           "--endOfLine" "lf"
-                           "--bracketSpacing" "true"
-                           "--jsxBracketSameLine" "false"
-                           "--requirePragma" "false"
-                           "--insertPragma" "false"
-                           "--proseWrap" "preserve"
-                           "--vueIndentScriptAndStyle" "false"))
+			   "--singleQuote" "true"
+			   "--printWidth" "100"
+			   "--tabWidth" "2"
+			   "--useTabs" "false"
+			   "--semi" "true"
+			   "--quoteProps" "as-needed"
+			   "--jsxSingleQuote" "false"
+			   "--trailingComma" "es5"
+			   "--arrowParens" "always"
+			   "--endOfLine" "lf"
+			   "--bracketSpacing" "true"
+			   "--jsxBracketSameLine" "false"
+			   "--requirePragma" "false"
+			   "--insertPragma" "false"
+			   "--proseWrap" "preserve"
+			   "--vueIndentScriptAndStyle" "false"))
 
   (add-hook 'js2-mode-hook 'prettier-js-mode)
   (add-hook 'js-mode-hook 'prettier-js-mode)
@@ -863,9 +879,9 @@
   ;;(add-hook 'vue-mode-hook #'setup-tide-mode)
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-hook 'web-mode-hook
-            (lambda ()
-              (when (string-equal "tsx" (file-name-extension buffer-file-name))
-                (setup-tide-tsx-mode))))
+	    (lambda ()
+	      (when (string-equal "tsx" (file-name-extension buffer-file-name))
+		(setup-tide-tsx-mode))))
 
 
   :config
@@ -914,7 +930,7 @@
   (setq ccls-executable "ccls")
   (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
   :hook ((c-mode c++-mode objc-mode) .
-         (lambda () (require 'ccls) (lsp))))
+	 (lambda () (require 'ccls) (lsp))))
 
 
 ;; ;;; Swift
@@ -956,8 +972,8 @@
   :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
+	 ("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
 (use-package rust-mode
@@ -969,16 +985,16 @@
   :config
   (setq rust-indent-offset 2)
   (add-hook 'rust-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook 'rust-format-buffer))))
+	    (lambda ()
+	      (add-hook 'before-save-hook 'rust-format-buffer))))
 
 (use-package cargo
   :ensure t
   :init
   (add-hook 'rust-mode-hook
-            (lambda ()
-              (cargo-minor-mode)
-              (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+	    (lambda ()
+	      (cargo-minor-mode)
+	      (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
   (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 (use-package racer
@@ -1009,8 +1025,8 @@
   ;; Customize compile command to run go build
   (if (not (string-match "go" compile-command))
       (set (make-local-variable 'compile-command)
-           "go build -v && go test -v && go vet && ./go"))
-                                        ; Godef jump key binding
+	   "go build -v && go test -v && go vet && ./go"))
+					; Godef jump key binding
   (local-set-key (kbd "M-.") 'godef-jump)
   (local-set-key (kbd "M-*") 'pop-tag-mark)
   (local-set-key (kbd "C-c C-c") 'compile)
@@ -1036,7 +1052,7 @@
   (require 'google-translate)
   (require 'google-translate-smooth-ui)
   (setq google-translate-translation-directions-alist
-        '(("en" . "ko") ("ko" . "en")))
+	'(("en" . "ko") ("ko" . "en")))
   (setq google-translate-pop-up-buffer-set-focus t)
   (setq google-translate-output-destination 'echo-area)
   (setq max-mini-window-height 0.5)
@@ -1103,40 +1119,40 @@
   (setq org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))
   (setq org-default-notes-file "~/org/agenda/index.org")
   (setq org-capture-templates '(("t" "Task" entry
-                                 (file+headline "~/org/agenda/index.org" "Task")
-                                 "* TODO %?")
-                                ("o" "Task @office" entry
-                                 (file+headline "~/org/agenda/nhn.org" "Task")
-                                 "* TODO %?\nSCHEDULED: %t")
-                                ("e" "English" item
-                                 (file+headline "~/org/agenda/english.org" "Inbox")
-                                 "%i%?")
-                                ("l" "LogTime" entry
-                                 (file+datetree "~/org/agenda/timelogs.org")
-                                 "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Productivity|Commute|etc} %?")
-                                ("d" "dev note" entry
-                                 (file+datetree "~/org/note/devnote.org")
-                                 "* %? %^g")))
+				 (file+headline "~/org/agenda/index.org" "Task")
+				 "* TODO %?")
+				("o" "Task @office" entry
+				 (file+headline "~/org/agenda/nhn.org" "Task")
+				 "* TODO %?\nSCHEDULED: %t")
+				("e" "English" item
+				 (file+headline "~/org/agenda/english.org" "Inbox")
+				 "%i%?")
+				("l" "LogTime" entry
+				 (file+datetree "~/org/agenda/timelogs.org")
+				 "** %U - %^{Activity|Coding|Work|Study|Rest|Meeting|Talk|Workout|Productivity|Commute|etc} %?")
+				("d" "dev note" entry
+				 (file+datetree "~/org/note/devnote.org")
+				 "* %? %^g")))
 
   (setq org-refile-targets '((org-agenda-files :level . 1) (("~/org/note/devnote.org") :level . 1)))
   (setq org-todo-keywords '((sequence "MONTH(2)" "WEEK(2)" "TODO(t)" "SOMEDAY(s)" "WAITING(w)" "|" "HOLD(h@/!)" "DONE(d)" "CANCELLED(c@/!)")))
   (setq org-tag-alist '((:startgroup . nil)
-                        ("@coding" . ?c) ("@writing" . ?w) ("@music" .  ?m) ("@work" . ?w)
-                        (:startgroup . nil)
-                        ("IDEA" . ?I) ("PIN". ?P)))
+			("@coding" . ?c) ("@writing" . ?w) ("@music" .  ?m) ("@work" . ?w)
+			(:startgroup . nil)
+			("IDEA" . ?I) ("PIN". ?P)))
   (setq org-agenda-custom-commands
-        '(("o" "Custom View"
-           ((agenda "")
-            (tags "PIN"
-                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE") 'notscheduled))))
-            (todo "TODO"
-                  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
-                   (org-agenda-overriding-header "Unscheduled tasks")))
-            (todo "SOMEDAY")))
-          ("ja" "Agenda search" search ""
-           ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
-          ("jd" "Document search" search ""
-           ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
+	'(("o" "Custom View"
+	   ((agenda "")
+	    (tags "PIN"
+		  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'todo '("DONE") 'notscheduled))))
+	    (todo "TODO"
+		  ((org-agenda-skip-function '(org-agenda-skip-entry-if 'scheduled 'deadline 'timestamp 'regexp "desparche" 'todo '("SOMEDAY")))
+		   (org-agenda-overriding-header "Unscheduled tasks")))
+	    (todo "SOMEDAY")))
+	  ("ja" "Agenda search" search ""
+	   ((org-agenda-files (file-expand-wildcards "~/org/agenda/*.org"))))
+	  ("jd" "Document search" search ""
+	   ((org-agenda-files (file-expand-wildcards "~/org/note/*.org"))))))
 
   (setq org-agenda-skip-deadline-prewarning-if-scheduled t)
   (setq org-agenda-skip-deadline-if-done t)
@@ -1167,7 +1183,7 @@
   (eval-after-load "org"
     '(require 'ox-gfm nil t))
   (setq org-plantuml-jar-path
-        (expand-file-name "~/plantuml/plantuml.jar"))
+	(expand-file-name "~/plantuml/plantuml.jar"))
 
   (setcar org-emphasis-regexp-components " \t('\"{[:alpha:]")
   (setcar (nthcdr 1 org-emphasis-regexp-components) "[:alpha:]- \t.,:!?;'\")}\\")
@@ -1178,11 +1194,11 @@
     (let ((yas-fallback-behavior 'return-nil)) (yas-expand)))
 
   (add-hook 'org-mode-hook
-            (lambda ()
-              (make-variable-buffer-local 'yas-expand-from-trigger-key)
-              (setq yas-expand-from-trigger-key [tab])
-              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-              (define-key yas/keymap [tab] 'yas-next-field)))
+	    (lambda ()
+	      (make-variable-buffer-local 'yas-expand-from-trigger-key)
+	      (setq yas-expand-from-trigger-key [tab])
+	      (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+	      (define-key yas/keymap [tab] 'yas-next-field)))
 
   ;; org에서 linewrap 되게
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
@@ -1229,9 +1245,9 @@
   ;;("C-c i" . multi-term))
   :config
   (add-hook 'term-mode-hook
-            (lambda ()
-              (define-key term-raw-map (kbd "C-j")
-                (lookup-key (current-global-map) (kbd "C-j"))))))
+	    (lambda ()
+	      (define-key term-raw-map (kbd "C-j")
+		(lookup-key (current-global-map) (kbd "C-j"))))))
 
 ;; terminal(멀티텀포함)에서 C-j를 글로벌 맵이용하도록
 
@@ -1267,7 +1283,7 @@
   (with-eval-after-load 'info
     (info-initialize)
     (add-to-list 'Info-directory-list
-                 "~/.emacs.d/site-lisp/magit/Documentation/"))
+		 "~/.emacs.d/site-lisp/magit/Documentation/"))
   ;;; 이맥스가 기본적으로 제공하는 Git 백엔드를 켜두면 매우 느려진다. magit만 쓴다.
   (setq vc-handled-backends nil)
   :config
@@ -1342,6 +1358,21 @@
     :name 'tomcat
     :ready-message "Running war on http://localhost:[0-9]+/"))
 
+(add-hook 'python-mode-hook
+    (lambda ()
+;       (setq indent-tabs-mode nil)
+;       (setq tab-width 4)
+	   ))
+
+;여기를 확인해 보자?!
+;(setq-default c-set-offset 'substatement-open 0)
+
+(setq-default
+ c-basic-offset 4
+ indent-tabs-mode t)
+
+(global-linum-mode t)
+
 (use-package restclient
   :ensure t)
 
@@ -1362,5 +1393,5 @@
  '(custom-safe-themes
    '("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ef280e6d5105f7d3906ae43a40aff5490970337796cd5f8a53207568b7e784d0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(package-selected-packages
-   '(c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
+   '(alchemist elixir-mode c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
 (put 'set-goal-column 'disabled nil)
