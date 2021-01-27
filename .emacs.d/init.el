@@ -540,7 +540,7 @@
   (setq projectile-indexing-method 'alien)
   ;;(setq projectile-indexing-method 'native)
   (setq projectile-globally-ignored-directories
-	(append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "lib" "node_modules" "libs" "deploy")
+	(append '(".DS_Store" ".git" ".svn" "out" "repl" "target" "dist" "node_modules" "libs" "deploy")
 		projectile-globally-ignored-directories))
   (setq projectile-globally-ignored-file-suffixes
 	(append '(".#*" ".DS_Store" "*.tar.gz" "*.tgz" "*.zip" "*.png" "*.jpg" "*.gif")
