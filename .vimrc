@@ -30,6 +30,8 @@ Plugin 'kien/ctrlp.vim'
 "NERDTree
 Plugin 'preservim/nerdtree'
 
+Plugin 'The-NERD-Commenter'
+
 Plugin 'flazz/vim-colorschemes'
 Plugin 'rafi/awesome-vim-colorschemes'
 
@@ -67,6 +69,8 @@ Plugin 'uplus/vim-clang-rename'
 Plugin 'prabirshrestha/vim-lsp'
 Plugin 'mattn/vim-lsp-settings'
 Plugin 'udalov/kotlin-vim'
+Plugin 'elixir-editors/vim-elixir'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -295,7 +299,9 @@ syntax on
 endif
 
 "-w: match only with whole-word
-set grepprg=ack\ --type\ cpp\ --nogroup\ --column\ -I\ -w\ $*
+"set grepprg=ack\ --type\ elixir\ --nogroup\ --column\ -I\ -w\ $*
+set grepprg=ack\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
+"set grepprg=ack\ --type\ cpp\ --nogroup\ --column\ -I\ -w\ $*
 set grepformat=%f:%l:%c:%m
 "can open result using :copen
 noremap <F2> :grep! <cword><CR><CR>
@@ -326,33 +332,4 @@ let g:sh_noisk = 1
 set mouse=a
 set selectmode=mouse,key,cmd
 
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'allowlist': ['python'],
-        \ })
-endif
-
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-
-    " refer to doc to add more commands
-endfunction
-
-augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
+set tags=tags

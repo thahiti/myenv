@@ -693,7 +693,7 @@
   (setq lsp-eldoc-render-all nil)
   (setq lsp-signature-render-all nil)
   (setq lsp-enable-indentation nil)
-  (setq lsp-prefer-flymake nil)
+  (setq lsp-prefer-flymake t)
   (setq lsp-enable-on-type-formatting nil)
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-javascript-implicit-project-config-experimental-decorators t)
@@ -1376,6 +1376,27 @@
 (use-package restclient
   :ensure t)
 
+(add-hook 'kotlin-mode-hook
+		  (lambda ()
+			(setq-default
+			  flycheck-mode t
+			  lsp-kotlin-mode-enable
+			  )))
+
+(eval-after-load 'flycheck
+				 (lambda ()
+				   (require 'flycheck-kotlin)
+				   (flycheck-kotlin-setup)))
+
+
+(require 'highlight-thing)
+(global-highlight-thing-mode)
+
+(setq highlight-thing-what-thing 'word)
+(setq highlight-thing-case-sensitive-p t)
+(setq highlight-thing-all-visible-buffers-p t)
+
+
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces
@@ -1393,5 +1414,6 @@
  '(custom-safe-themes
    '("a24c5b3c12d147da6cef80938dca1223b7c7f70f2f382b26308eba014dc4833a" "ef280e6d5105f7d3906ae43a40aff5490970337796cd5f8a53207568b7e784d0" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
  '(package-selected-packages
-   '(alchemist elixir-mode c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
+   '(helm-ack helm alchemist elixir-mode c++-mode c++ ccls lsp-haskell haskell-mode haskell mu4e json-mode lsp-treemacs treemacs lsp-ivy multi-libvterm zoom yasnippet-snippets wttrin writeroom-mode whitespace-cleanup-mode which-key wgrep web-mode vue-mode use-package-ensure-system-package use-package-chords tide swift-mode suggest spacemacs-theme spaceline shut-up rust-playground rjsx-mode rainbow-mode rainbow-delimiters racer prodigy prettier-js pocket-reader parinfer paredit ox-reveal ox-gfm org-tree-slide org-bullets ob-typescript ob-swift ob-rust ob-restclient ob-go nov multiple-cursors multi-term material-theme lsp-ui lsp-sourcekit lsp-javascript-typescript js-doc indent-guide iedit ibuffer-projectile hyperbole highlight-thing highlight-indent-guides helpful graphql goto-last-change google-translate git-timemachine git-gutter forge flycheck-swiftlint flycheck-swift flycheck-rust flycheck-package eyebrowse expand-region exec-path-from-shell evil-escape evil dumb-jump diminish delight dashboard counsel-projectile company-sourcekit company-lsp company-go cider cargo beacon ace-window)))
 (put 'set-goal-column 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
