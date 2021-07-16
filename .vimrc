@@ -289,7 +289,7 @@ else
 "colorscheme elflord
 "adapt colors for background
 "color hybrid
-color jellybeans
+"color jellybeans
 "color elflord
 "color molokai
 "color seoul256
