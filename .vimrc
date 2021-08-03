@@ -70,6 +70,7 @@ Plugin 'prabirshrestha/vim-lsp'
 Plugin 'mattn/vim-lsp-settings'
 Plugin 'udalov/kotlin-vim'
 Plugin 'elixir-editors/vim-elixir'
+Plugin 'junegunn/fzf'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -207,7 +208,7 @@ map <f7> :NERDTree<enter>
 
 "CtrlP
 map ,. :silent!w<enter>:CtrlPBuffer<enter>
-map ,f :silent!w<enter>:CtrlP<enter>
+map ,f :silent!w<enter>:FZF<enter>
 
 map ,a :A<enter><CR.
 
