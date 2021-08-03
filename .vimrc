@@ -150,7 +150,7 @@ set nowrapscan
 "syntax highlighing
 syntax on
 "ignore whitespaces when vim diff
-set diffopt+=iwhite
+"set diffopt+=iwhite
 "undo buffer size
 set history=100
 "use : as a file, line no separator
