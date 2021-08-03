@@ -19,14 +19,6 @@
                         "description": "left cmd (from option)",
                         "manipulators": [
                             {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "com.apple.systempreferences"
-                                        ],
-                                        "type": "frontmost_application_unless"
-                                    }
-                                ],
                                 "from": {
                                     "key_code": "left_alt"
                                 },
