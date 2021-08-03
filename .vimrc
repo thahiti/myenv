@@ -302,8 +302,9 @@ endif
 
 "-w: match only with whole-word
 "set grepprg=ack\ --type\ elixir\ --nogroup\ --column\ -I\ -w\ $*
-set grepprg=ack\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
+"set grepprg=ack\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
 "set grepprg=ack\ --type\ cpp\ --nogroup\ --column\ -I\ -w\ $*
+set grepprg=ack\ --type\ cc\ --nogroup\ --column\ -I\ -w\ $*
 set grepformat=%f:%l:%c:%m
 "can open result using :copen
 noremap <F2> :grep! <cword><CR><CR>
