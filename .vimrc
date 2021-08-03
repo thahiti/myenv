@@ -217,6 +217,7 @@ map ,m :MarksBrowse<enter>
 
 "NERDTree
 "map :NERDTree<enter>
+let NERDTreeIgnore = ['\.o$', '\.d$']
 
 "find all references
 "mz : mark z, viw : slelect a w, : copy
