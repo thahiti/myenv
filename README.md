@@ -20,3 +20,8 @@ edit ~/.zshrc
 `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 
 `vim +PluginInstall +qall`
+
+## git
+for github push
+
+`git remote set-url origin git@github.com:thahiti/myenv.git`
