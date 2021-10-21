@@ -122,7 +122,9 @@ set lazyredraw
 "use vim defaults
 set nocompatible
 "allways show status line
-set ls=2
+set statusline="%f%m%r%h%w [%Y] [0x%02.2B]%< %F%=%4v,%4l %3p%% of %L"
+set laststatus=2
+
 "highlight searches
 set hlsearch
 "do not keep a backup file
@@ -172,7 +174,7 @@ let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline_section_c = '%t'
+let g:airline_section_c = '%F'
 let did_install_default_menus = 1
 let did_install_syntax_menu = 1
 let skip_syntax_sel_menu = 1
@@ -183,9 +185,6 @@ let skip_syntax_sel_menu = 1
 let g:indent_guides_start_level = 1
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
-
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline_section_c = '%t'
 
 "set noimd
 ":set imi=1
