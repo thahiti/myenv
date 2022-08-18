@@ -72,6 +72,14 @@ Plugin 'udalov/kotlin-vim'
 Plugin 'elixir-editors/vim-elixir'
 Plugin 'junegunn/fzf'
 
+"vim wiki
+Plugin 'vimwiki/vimwiki'
+Plugin 'mhinz/vim-startify'
+
+Plugin 'jceb/vim-orgmode'
+Plugin 'tpope/vim-speeddating'
+Plugin 'vim-scripts/utl.vim'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -100,7 +108,7 @@ set softtabstop=4
 
 " Turn Tab keypresses into spaces. Sounds like this is happening to you.
 " You can still insert real Tabs as [Ctrl]-V [Tab].
-set noexpandtab
+set expandtab
 "set noexpandtab " Leave Tab keys as real tabs (ASCII 9 character).
 
 ":1,$retab! " Convert all tabs to space or ASCII-9 (per "expandtab"),
@@ -303,7 +311,9 @@ endif
 "set grepprg=ack\ --type\ elixir\ --nogroup\ --column\ -I\ -w\ $*
 "set grepprg=ack\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
 "set grepprg=ack\ --type\ cpp\ --nogroup\ --column\ -I\ -w\ $*
+"set grepprg=ack\ --type\ cc\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
 set grepprg=ack\ --type\ cc\ --nogroup\ --column\ -I\ -w\ $*
+"set grepprg=ack\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
 set grepformat=%f:%l:%c:%m
 "can open result using :copen
 noremap <F2> :grep! <cword><CR><CR>
@@ -335,3 +345,5 @@ set mouse=a
 set selectmode=mouse,key,cmd
 
 set tags=tags
+noremap <C-f> :let @" = expand("%:p") . ":" . line(".")<enter>
+inoremap <C-y> <C-r>"
