@@ -79,6 +79,7 @@ Plugin 'mhinz/vim-startify'
 Plugin 'jceb/vim-orgmode'
 Plugin 'tpope/vim-speeddating'
 Plugin 'vim-scripts/utl.vim'
+Plugin 'keith/swift.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -253,7 +254,7 @@ nnoremap :!python %
 if has("gui_running")
 " set guifont=consolas:h12: " use this font
 " set guifont=Dejavu\ Sans\ Mono:h10
-set guifont=Hack\ Nerd\ Font:h13
+set guifont=Hack:h17
 
 "height = 50 lines
 set lines=40
@@ -312,7 +313,7 @@ endif
 "set grepprg=ack\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
 "set grepprg=ack\ --type\ cpp\ --nogroup\ --column\ -I\ -w\ $*
 "set grepprg=ack\ --type\ cc\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
-set grepprg=ack\ --type\ cc\ --nogroup\ --column\ -I\ -w\ $*
+set grepprg=ack\ --type\ swift\ --nogroup\ --column\ -I\ -w\ $*
 "set grepprg=ack\ --type\ python\ --nogroup\ --column\ -I\ -w\ $*
 set grepformat=%f:%l:%c:%m
 "can open result using :copen
@@ -347,3 +348,5 @@ set selectmode=mouse,key,cmd
 set tags=tags
 noremap <C-f> :let @" = expand("%:p") . ":" . line(".")<enter>
 inoremap <C-y> <C-r>"
+
+noremap <C-n> :set invnumber<enter>
