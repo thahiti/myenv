@@ -350,3 +350,17 @@ noremap <C-f> :let @" = expand("%:p") . ":" . line(".")<enter>
 inoremap <C-y> <C-r>"
 
 noremap <C-n> :set invnumber<enter>
+
+nmap <ScrollWheelLeft> <nop>
+nmap <S-ScrollWheelLeft> <nop>
+nmap <C-ScrollWheelLeft> <nop>
+nmap <ScrollWheelRight> <nop>
+nmap <S-ScrollWheelRight> <nop>
+nmap <C-ScrollWheelRight> <nop>
+
+map ,1 :b1<return>
+map ,2 :b2<return>
+map ,3 :b3<return>
+map ,4 :b4<return>
+map ,5 :b5<return>
+map ,6 :b6<return>
