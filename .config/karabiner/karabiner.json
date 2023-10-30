@@ -17,6 +17,25 @@
                 },
                 "rules": [
                     {
+                        "description": "esc to ABC layout",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "escape"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "escape"
+                                    },
+                                    {
+                                        "shell_command": "osascript ~/myenv/change_to_ABC.scpt"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "left cmd (from option)",
                         "manipulators": [
                             {
@@ -396,6 +415,37 @@
                             }
                         ]
                     },
+
+                    {
+                        "description": "mouse click",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.apple.dt.Xcode"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "i",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "pointing_button": "button1"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+
                     {
                         "description": "copy time",
                         "manipulators": [
@@ -403,7 +453,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "net.shinyfrog.bear"
+                                            "net.shinyfrog.bear",
+                                            "md.obsidian"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -435,6 +486,7 @@
                             }
                         ]
                     },
+
                     {
                         "description": "copy date",
                         "manipulators": [
@@ -442,7 +494,8 @@
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "net.shinyfrog.bear"
+                                            "net.shinyfrog.bear",
+                                            "md.obsidian"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -474,6 +527,89 @@
                             }
                         ]
                     },
+
+                    {
+                        "description": "copy think emoji",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "net.shinyfrog.bear",
+                                            "md.obsidian"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+
+                                "from": {
+                                    "key_code": "y",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/myenv/copy_emoji_think.scpt"
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                    {
+                                        "key_code": "v",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    }
+                                ]},
+                                "type": "basic"
+                            }
+                        ]
+                    },
+
+                    {
+                        "description": "copy target emoji",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "net.shinyfrog.bear",
+                                            "md.obsidian"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+
+                                "from": {
+                                    "key_code": "p",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "osascript ~/myenv/copy_emoji.scpt"
+                                    }
+                                ],
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                    {
+                                        "key_code": "v",
+                                        "modifiers": [
+                                            "right_command"
+                                        ]
+                                    }
+                                ]},
+                                "type": "basic"
+                            }
+                        ]
+                    },
+
                     {
                         "description": "PC-Style Select-All",
                         "manipulators": [
