@@ -254,7 +254,7 @@ nnoremap :!python %
 if has("gui_running")
 " set guifont=consolas:h12: " use this font
 " set guifont=Dejavu\ Sans\ Mono:h10
-set guifont=Hack:h17
+set guifont=Hack:h15
 
 "height = 50 lines
 set lines=40
